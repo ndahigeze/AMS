@@ -69,8 +69,8 @@
                                 Create Account
                             </div>
                             <div class="card-body">
-                                <p:growl autoUpdate="true"/>
-                                <p:panel toggleable="true"  id="register">
+                                <p:growl autoUpdate="true" life="2000"/>
+                                <p:panel toggleable="true"  id="register" >
                                     <p:messages for="reg"/>
                                     <h:panelGrid columns="3" style="width: 100%;">
                                         
@@ -86,9 +86,6 @@
                                         <label>Phone</label>
                                         <b:inputText id="phone" style="height: 30px" value="#{userModel.user.phone}" required="true" required-message="This is Required"/>
                                          <p:messages for="phone" />
-                                        <label>Birth Date</label>
-                                        <p:inputText type="date" converter="dateConverter" id="dob" value="#{userModel.user.dob}" required="true" requiredMessage="This is Required" />
-                                        <p:messages for="dob" />
                                         <label>Address</label>
                                         <b:inputText type="text" id="address" value="#{userModel.user.address}" required="true" requiredMessage="This is Required" />
                                        <p:messages for="address" />

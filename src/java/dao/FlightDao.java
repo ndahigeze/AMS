@@ -5,25 +5,24 @@
  */
 package dao;
 
-import domain.District;
-import domain.Province;
+import domain.AirLine;
+import domain.Flight;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import utilPac.HibernateUtil;
 
-
 /**
  *
  * @author Ndahigeze
  */
-public class DistrictDao extends GenericDao<District>{
-     public static List<District> viewAllByProvince(Province pr){
+public class FlightDao extends GenericDao<Flight>{
+   public static List<Flight> viewByAiline(String pr){
       Session ses=HibernateUtil.getSessionFactory().openSession();
-      Query que=ses.createQuery("FROM District b WHERE b.province= :v ");
-      que.setString("v", pr.getProvincecode());
-      List<District> list=que.list();
+      Query que=ses.createQuery("FROM Flight b WHERE b.airLine= :v ");
+      que.setString("v",pr );
+      List<Flight> list=que.list();
       ses.close();
       return list;
-    }
+    }   
 }

@@ -18,15 +18,24 @@ $(document).ready(function(){
         $("#courseAdd").slideDown();
         $("#hotelRoom").slideUp();
         $("#book").slideUp();
+         $("#reservation").hide();
     });
      $("#rooms").click(function(){
          $("#courseAdd").slideUp();
         $("#hotelRoom").slideDown(); 
          $("#book").slideUp();
+          $("#reservation").hide();
     });
      $("#booking").click(function(){
          $("#courseAdd").hide();
            $("#book").slideDown();
          $("#hotelRoom").hide();  
+          $("#reservation").hide();
     });
+    $("#reservations").click(function(){
+          $("#courseAdd").hide();
+           $("#book").hide();
+         $("#hotelRoom").hide();  
+         $("#reservation").slideDown();
+    })
 });

@@ -147,11 +147,16 @@ public class UserModel{
     
     public void recordUser(){
         try{
-             user.setType("customer");
-             String msg=new UserDao().create(user);
-            user=new Users();
-            users=new UserDao().findAll(Users.class);
-             Message.succes(msg, "");
+            if(user.getPassword().equals(ps)){
+                 user.setType("customer");
+                 String msg=new UserDao().create(user);
+                 user=new Users();
+                users=new UserDao().findAll(Users.class);
+                Message.succes(msg, "");
+            }else{
+               Message.failure("Confirm Password","");
+            }
+            
         }catch(Exception ex){
               Message.failure(ex.getLocalizedMessage(), "");
         }
@@ -201,8 +206,8 @@ public class UserModel{
             switch (user.getType()) {
                 case "admin":
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("session", user);
-                     ec.redirect(ec.getRequestContextPath() + "/pages/adminPages/hotelPage.xhtml");
-                    return "pages/adminPages/hotelPage.xhtml?faces-redirect=true";
+                     ec.redirect(ec.getRequestContextPath() + "/pages/adminPages/flightPage.xhtml");
+                    return "pages/adminPages/flightPage.xhtml?faces-redirect=true";
                 case "customer":
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("session", user);
                     ec.redirect(ec.getRequestContextPath() + "/pages/customerPage/customerPage.xhtml");

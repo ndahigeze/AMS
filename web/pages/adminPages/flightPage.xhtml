@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>course</title>
+        <link href="#{request.contextPath}/css/bootstrap-material.css" rel="stylesheet" type="text/css"/>
+        <link href="#{request.contextPath}/css/myStyle.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body  style="font-size: 15px">
+        <h:form id="head">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li classs="nav-item active">
+                            <b:commandButton action="#{userModel.logout()}" value="Logout"  class="btn btn-info"/>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </h:form>
+        <div class="row col" >
+            <div class="col-md-2" id="sideBar">
+                <div id="container" class="sidelinks">
+                    <ul class="nav-item">
+                        <li id="hotel"><a href="#">Manage AirLines</a></li>
+                        <li id="rooms"><a href="#">Manage Flights</a></li>
+                        <li id="booking"><a href="#">Manage Seat Categories</a></li>
+                        <li id="reservations"><a href="#">Reservations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2" >
+
+            </div>
+            <div class="col">
+                <div class="container-fluid" id="container"> 
+                    <p:messages autoUpdate="true" closable="true" for="crecod" globalOnly="true"  />
+                    <section id="courseAdd">
+                        <div class="card bg-primary mb-3 text-center">
+                            <span style="font-size: 25px;font-family: 'Times New Romans'">Airlines</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="card">
+                                    <div class="card-header">Record Hotel</div>
+                                    <div class="card-body">
+                                        <h:form id="crecod">
+                                            <p:panel toggleable="true"  id="record">
+                                                <h:panelGrid columns="3" style="width: 100%;">
+                                                    <label>Airline Name</label>
+                                                    <b:inputText id="un" style="height: 30px" value="#{aiLineModel.airLine.name}" required="true" required-message="Required"/>
+                                                    <b:message for="un"/>
+
+                                                    <td><b:commandButton class="btn btn-primary" value="Record" action="#{aiLineModel.recordAirLine()}" update="rrecord,courses,crecod"></b:commandButton></td>
+                                                </h:panelGrid>
+                                            </p:panel>
+                                        </h:form>  
+                                    </div>
+                                    <div class="card-footer"></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h:form id="courses">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col">Airline List</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <b:dataTable value="#{aiLineModel.airLines}" var="u" searching="true" columnVisibility="true" pdf="true" excel="true">
+                                                <b:dataTableColumn value="#{u.name}" label="Airline Name"/>
+                                                <b:dataTableColumn label="Edit">
+                                                    <b:commandButton action="#{aiLineModel.setupdate(u)}" class="btn btn-info" update="crecod" value="Edit"></b:commandButton>
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+                                        </div>
+                                        <div class="card-footer"></div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="hotelRoom" class="mt-5">
+                        <div class="card bg-primary mb-3 text-center">
+                            <span style="font-size: 25px;font-family: 'Times New Romans'">Flights</span>
+                        </div>
+                        <p:messages autoUpdate="true" closable="true" for="rrecord" globalOnly="true"  />
+                        <div class="row">                        
+                            <div class="col-md-5">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Record New Flight
+                                    </div>
+                                    <div class="card-body">
+                                        <h:form id="rrecord">
+                                            <p:panel toggleable="true" id="record">
+                                                <h:panelGrid columns="3">
+                                                    <label for="un">Flight Number</label>
+                                                    <b:inputText id="un" type="number" style="height: 30px" value="#{flightModel.flight.flightNo}" required="true" required-message="Required"/>
+                                                    <b:message for="un"/>
+                                                    <label for="ds">Source</label>
+                                                    <b:inputText  id="ds" value="#{flightModel.flight.source}" required="true" required-message="Required" />
+                                                    <b:message for="ds"/>
+                                                    <label>Flight Destination</label>
+                                                    <b:inputText id="rp" style="height: 30px" value="#{flightModel.flight.destination}" required="true" required-message="Required"/>
+                                                    <b:message for="rp"/>
+                                                    <label>Dep Date</label>
+                                                    <b:datepicker id="dp" style="height: 30px" value="#{flightModel.flight.depDate}" required="true" required-message="Required"/>
+                                                    <b:message for="dp"/>
+                                                    <label>Dep Time</label>
+                                                    <b:dateTimePicker id="dt" style="height: 30px" value="#{flightModel.flight.depTime}" required="true" required-message="Required"/>
+                                                    <b:message for="dt"/>
+                                                    <label>Dep Status</label>
+                                                    <b:inputText id="dst" style="height: 30px" value="#{flightModel.flight.depStatus}" required="true" required-message="Required"/>
+                                                    <b:message for="dst"/>
+                                                    <label>AirLine</label>
+                                                    <b:selectOneMenu value="#{flightModel.dist}"
+                                                                     id="df" required="true" style="height: 30px" required-message="This is Required">
+                                                        <f:selectItems value="#{aiLineModel.airLines}" var="dist" itemLabel="#{dist.name}"/>                            
+                                                    </b:selectOneMenu>
+                                                    <b:message for="df" autoUpdate="true"/>
+                                                    <td><b:commandButton class="btn btn-primary" value="Record" action="#{flightModel.recordFlight()}" update="roomList,rrecord"></b:commandButton></td>
+                                                </h:panelGrid>
+                                            </p:panel>
+                                        </h:form>
+                                    </div>
+                                    <div class="card-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h:form id="roomList">
+                                    <div class="card">
+                                        <div class="card-header">    
+                                            Flights
+                                        </div>
+                                        <div class="card-body">
+                                            <b:dataTable value="#{flightModel.flights}" var="u" columnVisibility="true" searching="true" pdf="true" excel="true">
+                                                <b:dataTableColumn value="#{u.flightNo}" label="Flight Number"/>
+                                                <b:dataTableColumn value="#{u.source}" label="Flight Source"/>
+                                                <b:dataTableColumn value="#{u.destination} RWF" label="Flight Destination" />
+                                                <b:dataTableColumn value="#{u.depDate}" label="DepTime"/>
+                                                <b:dataTableColumn value="#{u.depTime}" label="DepTime"/>
+                                                <b:dataTableColumn value="#{u.airLine.name}" label="DepTime"/> 
+                                                <b:dataTableColumn value="#{u.depStatus}" label="Status"/> 
+                                                <b:dataTableColumn label="Edit">
+                                                    <b:commandButton action="#{flightModel.setupdate(u)}" class="btn btn-info" update="rrecord" value="Edit"></b:commandButton>
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+
+                                        </div>
+                                        <div class="card-footer"></div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="book">
+                        <div class="card bg-primary mb-3 text-center">
+                            <span style="font-size: 25px;font-family: 'Times New Romans'">Seat Categories</span>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h:form id="seat">
+                                    <b:message for="seat"/>
+                                    <div class="card">
+                                        <div class="card-header bg-info">
+                                            <div class="row">
+                                                <div class="col">Record Seat Category</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <label>Seat Type</label>
+                                            <b:inputText id="un" style="height: 30px;font-size: 15px;" value="#{seatCategoryModel.seatCategory.type}" required="true" required-message="Required"/>
+                                            <b:message for="un"/>
+                                            <label>Seat Price</label>
+                                            <b:inputText id="sp" style="height: 30px;font-size: 15px;" value="#{seatCategoryModel.seatCategory.price}" required="true" required-message="Required"/>
+                                            <b:message for="sp"/>
+                                            <label>Seat Number</label>
+                                            <b:inputText id="sn" style="height: 30px;font-size: 15px;" value="#{seatCategoryModel.seatCategory.seatNumbers}" required="true" required-message="Required"/>
+                                            <b:message for="sn"/>
+                                            <label>Airline</label>
+                                            <b:selectOneMenu value="#{flightModel.dist}"
+                                                             id="dff" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
+                                                <f:selectItems value="#{aiLineModel.airLines}" var="a" itemLabel="#{a.name}" itemValue="#{a.name}"/>
+                                                <f:ajax render="dss" listener="#{flightModel.byAiline()}"/>
+                                            </b:selectOneMenu>
+                                            <b:message for="dff"/>
+                                            <label>Flight Number</label>
+                                            <b:selectOneMenu value="#{seatCategoryModel.pid}"
+                                                             id="dss" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
+                                                <f:selectItems value="#{flightModel.byp}" var="dist" itemLabel="#{dist.flightNo}"/>                            
+                                            </b:selectOneMenu>
+                                            <b:message for="dss"/>
+                                        </div>
+                                        <div class="card-footer">
+                                            <td><b:commandButton class="btn btn-primary" value="Record" action="#{seatCategoryModel.create()}" update="seat,bookings"></b:commandButton></td>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                            <div class="col">
+                                <h:form id="bookings">
+                                    <div class="card">
+                                        <div class="card-header bg-info">
+                                            <div class="row">
+                                                <div class="col">Seats Lists</div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <b:dataTable value="#{seatCategoryModel.seatCategorys}" var="u" searching="true" pdf="true" csv="true" excel="true">
+                                                <b:dataTableColumn value="#{u.type}" label="Seat Type"/>
+                                                <b:dataTableColumn value="#{u.price}" label="Room Number"/>
+                                                <b:dataTableColumn value="#{u.seatNumbers}" label="Seats Numbers"/>
+                                                <b:dataTableColumn value="#{u.flight.flightNo}" label="Flight No"/>
+                                                 <b:dataTableColumn label="Edit">
+                                                     <b:commandButton action="#{seatCategoryModel.setUpdate(u)}" class="btn btn-info" update="seat" value="Edit"></b:commandButton>
+                                                </b:dataTableColumn>
+                                            </b:dataTable>
+
+                                        </div>
+                                        <div class="card-footer"></div>
+                                    </div>
+                                </h:form>
+
+                            </div>
+
+                        </div>
+                    </section>
+                    <section id="reservation">
+                        <div class="card bg-primary mb-3 text-center">
+                            <span style="font-size: 25px;font-family: 'Times New Romans'">Flight Reservations</span>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h:form id="rs">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Reservations 
+                                        </div>
+                                        <div class="card-body">
+                                            <b:dataTable value="#{reservationModel.bookings}" var="u" searching="true" pdf="true" csv="true" excel="true">
+
+                                                <b:dataTableColumn label="Passenger">
+                                                    <b:label value="#{u.customer.fname}"/>
+                                                    <b:label value="#{u.customer.lname}"/>
+                                                </b:dataTableColumn>
+                                                <b:dataTableColumn value="#{u.seatCategory.type}" label="Seat Category"/>
+                                                <b:dataTableColumn value="#{u.numberofSeat}" label="Seats Taken"/>
+                                                <b:dataTableColumn value="#{u.seatCategory.flight.flightNo}" label="Flight No"/>
+                                                <b:dataTableColumn value="#{u.seatCategory.flight.airLine.name}" label="Airline"/>
+                                            </b:dataTable>
+                                        </div>
+                                        <div class="card-footer"></div>
+                                    </div>
+                                </h:form>
+                            </div> 
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <script src="#{request.contextPath}/js/jquery-2.2.2.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/js/Myjs.js" type="text/javascript"></script>
+    </h:body>
+</html>

@@ -48,7 +48,7 @@ and open the template in the editor.
 #hotelRoom{
    display: none;
 }  
-#book{
+#book,#reservation{
   display: none; 
 }
 

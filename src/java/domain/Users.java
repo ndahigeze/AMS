@@ -6,15 +6,11 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -24,28 +20,18 @@ import javax.persistence.Temporal;
 public class Users implements Serializable {
 
     @OneToMany(mappedBy = "customer")
-    private List<Booking> bookings;
+    private List<Reservation> bookings;
     @Id 
    private String id=UUID.randomUUID().toString();
    private String fname;
    private String lname;
    private String phone;
    private String password;
-    @Temporal(javax.persistence.TemporalType.DATE)
-   private Date dob; 
    private String type;
    private String address;
    private String username;
     public String getId() {
         return id;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
     }
 
     public String getUsername() {
@@ -91,15 +77,6 @@ public class Users implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
     public String getType() {
         return type;
     }

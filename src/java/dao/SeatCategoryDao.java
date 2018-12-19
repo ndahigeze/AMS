@@ -5,8 +5,7 @@
  */
 package dao;
 
-import domain.Hotel;
-import domain.Room;
+import domain.SeatCategory;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,12 +15,12 @@ import utilPac.HibernateUtil;
  *
  * @author Ndahigeze
  */
-public class RoomDao extends GenericDao<Room>{
-   public static List<Room> viewByHotel(String pr){
+public class SeatCategoryDao extends GenericDao<SeatCategory>{
+     public static List<SeatCategory> viewByFlight(String pr){
       Session ses=HibernateUtil.getSessionFactory().openSession();
-      Query que=ses.createQuery("FROM Room b WHERE b.hotel= :v ");
+      Query que=ses.createQuery("FROM SeatCategory b WHERE b.flight= :v ");
       que.setString("v",pr );
-      List<Room> list=que.list();
+      List<SeatCategory> list=que.list();
       ses.close();
       return list;
     }   

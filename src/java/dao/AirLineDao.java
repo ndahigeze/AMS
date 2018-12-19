@@ -5,12 +5,12 @@
  */
 package dao;
 
-import domain.Booking;
+import domain.AirLine;
 
 /**
  *
  * @author Ndahigeze
  */
-public class BookingDao extends GenericDao<Booking>{
+public class AirLineDao extends GenericDao<AirLine>{
     
 }
