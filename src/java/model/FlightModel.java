@@ -91,14 +91,16 @@ public class FlightModel {
     public void recordFlight(){
         try{
             AirLine d=new AirLine();
-            d.setName(dist);
+            d.setId(Integer.parseInt(dist));
             flight.setAirLine(d);
+            flight.setDepStatus("Scheduled");
              String msg=new FlightDao().create(flight);
             flight=new Flight();
             flights=new FlightDao().findAll(Flight.class);
              Message.succes(msg, "rrecord");
         }catch(Exception ex){
-              Message.failure(ex.getLocalizedMessage(), "rrecord");
+             System.out.println(ex.getCause().getMessage()+"Test fail");
+              Message.failure(ex.getMessage(), "rrecord");
         }
         
     }
@@ -143,7 +145,10 @@ public class FlightModel {
       flight=u;
     }
     public void byAiline(){
-      byp=FlightDao.viewByAiline(dist);
+        AirLine p=new AirLine();
+        p.setId(Integer.parseInt(dist));
+      byp=FlightDao.viewByAiline(p);
+     
     }
    
 }

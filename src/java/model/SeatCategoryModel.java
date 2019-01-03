@@ -26,7 +26,7 @@ import javax.faces.context.FacesContext;
 public class SeatCategoryModel {
 
     private SeatCategory seatCategory = new SeatCategory();
-    private List<SeatCategory> seatCategorys = new SeatCategoryDao().findAll(SeatCategory.class);
+  private List<SeatCategory> seatCategorys = new SeatCategoryDao().findAll(SeatCategory.class);
     private List<SeatCategory> sc=new ArrayList();
     private String search = new String();
     private String proUp = new String();
@@ -120,7 +120,7 @@ public class SeatCategoryModel {
 
     @PostConstruct
     public void SeatCategory() {
-         seatCategorys = new ArrayList();
+        seatCategorys = new ArrayList();
         seatCategorys = new SeatCategoryDao().findAll(SeatCategory.class);
     }
 

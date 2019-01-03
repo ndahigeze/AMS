@@ -41,7 +41,18 @@ public class ReservationModel {
         return search;
     }
 
+    public SeatCategory getS() {
+        return s;
+    }
 
+    public void setS(SeatCategory s) {
+        this.s = s;
+    }
+ 
+    private SeatCategory s;
+      public void sets(SeatCategory seat){
+       s=seat;
+      }
     public void setSearch(String search) {
         this.search = search;
     }
@@ -79,18 +90,17 @@ public class ReservationModel {
     }
 
     public void recordBooking() {
-        SeatCategory d = new SeatCategory();
-        d.setId(dist);
-        System.out.println(d.getId());
+       
+      System.out.println(s.getId()+"hello there");
         Users u = searchUser();
         try {
-            if (checkNumberOfSeat(dist, booking.getNumberofSeat())) {
-                booking.setSeatCategory(d);
+            if (checkNumberOfSeat(s.getId(), booking.getNumberofSeat())) {
+                booking.setSeatCategory(s);
                 booking.setBookingDate(new Date());
                 booking.setCustomer(u);
-                Double p=calculateAmoutn(dist, booking.getNumberofSeat());
-                reduceSeat(booking.getNumberofSeat(), dist);
-                booking.setTotal(calculateAmoutn(dist, booking.getNumberofSeat()));
+                Double p=calculateAmoutn(s.getId(), booking.getNumberofSeat());
+                reduceSeat(booking.getNumberofSeat(), s.getId());
+                booking.setTotal(calculateAmoutn(s.getId(), booking.getNumberofSeat()));
                 String msg = new ReservationDao().create(booking);
                 booking = new Reservation();
                 bookings = new ReservationDao().findAll(Reservation.class);

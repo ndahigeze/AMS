@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>course</title>
+        <title>Airline</title>
         <link href="#{request.contextPath}/css/bootstrap-material.css" rel="stylesheet" type="text/css"/>
         <link href="#{request.contextPath}/css/myStyle.css" rel="stylesheet" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -59,7 +59,7 @@ and open the template in the editor.
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="card">
-                                    <div class="card-header">Record Hotel</div>
+                                    <div class="card-header">Record Airline</div>
                                     <div class="card-body">
                                         <h:form id="crecod">
                                             <p:panel toggleable="true"  id="record">
@@ -129,9 +129,7 @@ and open the template in the editor.
                                                     <label>Dep Time</label>
                                                     <b:dateTimePicker id="dt" style="height: 30px" value="#{flightModel.flight.depTime}" required="true" required-message="Required"/>
                                                     <b:message for="dt"/>
-                                                    <label>Dep Status</label>
-                                                    <b:inputText id="dst" style="height: 30px" value="#{flightModel.flight.depStatus}" required="true" required-message="Required"/>
-                                                    <b:message for="dst"/>
+                                                  
                                                     <label>AirLine</label>
                                                     <b:selectOneMenu value="#{flightModel.dist}"
                                                                      id="df" required="true" style="height: 30px" required-message="This is Required">
@@ -158,7 +156,7 @@ and open the template in the editor.
                                             <b:dataTable value="#{flightModel.flights}" var="u" columnVisibility="true" searching="true" pdf="true" excel="true">
                                                 <b:dataTableColumn value="#{u.flightNo}" label="Flight Number"/>
                                                 <b:dataTableColumn value="#{u.source}" label="Flight Source"/>
-                                                <b:dataTableColumn value="#{u.destination} RWF" label="Flight Destination" />
+                                                <b:dataTableColumn value="#{u.destination}" label="Flight Destination" />
                                                 <b:dataTableColumn value="#{u.depDate}" label="DepTime"/>
                                                 <b:dataTableColumn value="#{u.depTime}" label="DepTime"/>
                                                 <b:dataTableColumn value="#{u.airLine.name}" label="DepTime"/> 
@@ -199,17 +197,11 @@ and open the template in the editor.
                                             <label>Seat Number</label>
                                             <b:inputText id="sn" style="height: 30px;font-size: 15px;" value="#{seatCategoryModel.seatCategory.seatNumbers}" required="true" required-message="Required"/>
                                             <b:message for="sn"/>
-                                            <label>Airline</label>
-                                            <b:selectOneMenu value="#{flightModel.dist}"
-                                                             id="dff" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
-                                                <f:selectItems value="#{aiLineModel.airLines}" var="a" itemLabel="#{a.name}" itemValue="#{a.name}"/>
-                                                <f:ajax render="dss" listener="#{flightModel.byAiline()}"/>
-                                            </b:selectOneMenu>
-                                            <b:message for="dff"/>
+                                           
                                             <label>Flight Number</label>
                                             <b:selectOneMenu value="#{seatCategoryModel.pid}"
                                                              id="dss" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
-                                                <f:selectItems value="#{flightModel.byp}" var="dist" itemLabel="#{dist.flightNo}"/>                            
+                                                <f:selectItems value="#{flightModel.flights}" var="dist" itemLabel="#{dist.flightNo}"/>                            
                                             </b:selectOneMenu>
                                             <b:message for="dss"/>
                                         </div>

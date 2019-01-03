@@ -74,7 +74,6 @@ public class AiLineModel {
  
     public void recordAirLine(){
         try{
-           
              String msg=new AirLineDao().create(airLine);
             airLine=new AirLine();
             airLines=new AirLineDao().findAll(AirLine.class);

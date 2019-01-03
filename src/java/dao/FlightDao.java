@@ -17,10 +17,10 @@ import utilPac.HibernateUtil;
  * @author Ndahigeze
  */
 public class FlightDao extends GenericDao<Flight>{
-   public static List<Flight> viewByAiline(String pr){
+   public static List<Flight> viewByAiline(AirLine p){
       Session ses=HibernateUtil.getSessionFactory().openSession();
       Query que=ses.createQuery("FROM Flight b WHERE b.airLine= :v ");
-      que.setString("v",pr );
+      que.setParameter("v",p );
       List<Flight> list=que.list();
       ses.close();
       return list;

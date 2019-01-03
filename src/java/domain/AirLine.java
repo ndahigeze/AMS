@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,7 +25,11 @@ public class AirLine implements Serializable {
     @OneToMany(mappedBy = "airLine")
     private List<Flight> rooms;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String name;
+
+   
 
     public String getName() {
         return name;
@@ -37,12 +43,20 @@ public class AirLine implements Serializable {
         return rooms;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setRooms(List<Flight> rooms) {
         this.rooms = rooms;
     }
  
     @Override
     public String toString(){
-      return name;
+      return id+"";
     }
 }

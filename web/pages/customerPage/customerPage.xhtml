@@ -53,26 +53,9 @@ and open the template in the editor.
                                     <b:messages for="recorded"  />
                                     <p:panel toggleable="true" id="record">
                                         <h:panelGrid columns="3">
-                                            <label>Airline</label>
-                                           <b:selectOneMenu value="#{flightModel.dist}"
-                                                             id="dff" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
-                                                <f:selectItems value="#{aiLineModel.airLines}" var="a" itemLabel="#{a.name}" itemValue="#{a.name}"/>
-                                                <f:ajax render="dss" listener="#{flightModel.byAiline()}"/>
-                                            </b:selectOneMenu>
-                                            <b:message for="dff"/>
-                                            <label>Flight Number</label>
-                                            <b:selectOneMenu value="#{seatCategoryModel.pid}"
-                                                             id="dss" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
-                                                <f:selectItems value="#{flightModel.byp}" var="dist" itemLabel="#{dist.flightNo}"/>  
-                                                <f:ajax render="sc" listener="#{seatCategoryModel.viewByFlight()}"/>
-                                            </b:selectOneMenu>
-                                             <b:message for="dss"/> 
-                                             <label>Seat Category</label>
-                                             <b:selectOneMenu value="#{reservationModel.dist}"
-                                                             id="sc" required="true" style="height: 30px;font-size: 15px;" required-message="This is Required">
-                                                 <f:selectItems value="#{seatCategoryModel.sc}" var="di" itemLabel="#{di.type}"/>                            
-                                            </b:selectOneMenu>
-                                            <b:message for="sc"/>                                       
+                                              <label>Seat Type</label>
+                                              <b:inputText id="dg" style="height: 30px" value="#{reservationModel.s.type}"   required="true" required-message="Required"/>
+                                              <b:message for="dg"/>
                                             <label>Number Of Seat</label>
                                             <b:inputText id="cd" style="height: 30px" value="#{reservationModel.booking.numberofSeat}"   required="true" required-message="Required"/>
                                             <b:message for="cd"/>
@@ -115,11 +98,15 @@ and open the template in the editor.
                                 </div>
                                 <div class="card-body">
                                     <b:dataTable value="#{seatCategoryModel.seatCategorys}" var="u" searching="true" pdf="true" csv="true" excel="true">
-
+                                  
                                         <b:dataTableColumn value="#{u.type}" label="Seat Type"/>
-                                        <b:dataTableColumn value="#{u.price} RWF" label="Room Number"/>
+                                        <b:dataTableColumn value="#{u.price} RWF" label="Price"/>
                                         <b:dataTableColumn value="#{u.seatNumbers}" label="Seats Numbers Left"/>
                                         <b:dataTableColumn value="#{u.flight.flightNo}" label="Flight No"/>
+                                        <b:dataTableColumn value="#{u.flight.airLine.name}" label="Airline name"/>
+                                              <b:dataTableColumn label="Book">
+                                                  <b:commandButton action="#{reservationModel.sets(u)}" class="btn btn-info" update="recorded" value="Book"></b:commandButton>
+                                                </b:dataTableColumn>
                                     </b:dataTable>
 
                                 </div>
